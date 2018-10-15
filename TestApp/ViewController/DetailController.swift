@@ -13,8 +13,9 @@ import SDWebImage
 class DetailController: UIViewController {
     
     //TODO: - inject
-    var user: Friend! {
+    var user: Friend? {
         didSet {
+            guard let user = user else { return  }
             print(user.firstName)
         }
     }

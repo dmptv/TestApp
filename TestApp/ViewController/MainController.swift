@@ -19,7 +19,18 @@ class MainController: UIViewController {
     //TODO: - inject service
     let service: Service = Service()
     
-    var user: Friend!
+    var user: Friend? {
+        didSet {
+            if let user = user {
+                DispatchQueue.main.async { [weak self] in
+                    guard let strongSelf = self else { return }
+                    strongSelf.imageView.sd_setImage(with: user.photo200Url, completed: nil)
+                    strongSelf.userLabel.text = user.firstName + " " + user.lastName
+                }
+            }
+        }
+    }
+    
     var friends: [Friend] = []
 
     override func viewDidLoad() {
@@ -71,6 +82,18 @@ class MainController: UIViewController {
             imageView.image = UIImage.init(named: "dummy")
             userLabel.text = ""
         }
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        imageView.addGestureRecognizer(tapGesture)
+        imageView.isUserInteractionEnabled = true
+    }
+    
+    @objc func handleTap() {
+        //TODO: - move it to RxFlow
+        let detailStoryboard = UIStoryboard.storyboard(.detail)
+        let detailController: DetailController = detailStoryboard.instantiateViewController()
+        detailController.user = user
+        self.show(detailController, sender: self)
     }
     
     private func setupRefreshControl() {
@@ -100,10 +123,6 @@ class MainController: UIViewController {
         service.getData { [weak self] result in
             if let user = result, let strongSelf = self {
                 strongSelf.user = user
-                DispatchQueue.main.async {
-                    strongSelf.imageView.sd_setImage(with: user.photo200Url, completed: nil)
-                    strongSelf.userLabel.text = user.firstName + " " + user.lastName
-                }
             }
         }
         updateFriends()
@@ -155,13 +174,11 @@ extension MainController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         //TODO: - move it to RxFlow
         let detailStoryboard = UIStoryboard.storyboard(.detail)
         let detailController: DetailController = detailStoryboard.instantiateViewController()
         let friend = friends[indexPath.row]
         detailController.user = friend
-        navigationController?.hidesBarsOnSwipe = false
         self.show(detailController, sender: self)
         
         tableView.deselectRow(at: indexPath, animated: true)

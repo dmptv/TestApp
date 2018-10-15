@@ -11,9 +11,6 @@ import VK_ios_sdk
 
 class Service {
 
-    let defaultSession = URLSession(configuration: .default)
-    var dataTask: URLSessionDataTask?
-    
     var requestUser = VKRequest.init(method: App.Methods.usersGet,
                                      parameters: [
                                         VK_API_FIELDS: App.String.fields,
