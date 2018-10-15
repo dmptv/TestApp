@@ -8,41 +8,19 @@
 
 import Foundation
 
-//{\"response\" :
-//                 [
-//                  {\"id\":20375184,\"first_name\":\"Anastasia\",\"last_name\":\"Bryzgalova\",\"photo_100\":\"https:\\/\\/pp.userapi.com\\/c836331\\/v836331184\\/30f6e\\/v_goYsE30fo.jpg?ava=1\"}
-//                 ]
-//}
-
-//struct ResponseUsers: Codable {
-//    var response: Users?
-//}
-
-struct Users: Codable {
-    var response: [Friend?]
-}
-
-struct ResponseMessages: Codable {
-    var response: Friends?
-}
-
-struct Friends: Codable {
-    var count: Int?
-    var items: [Friend?]
-}
-
 struct Friend {
     var id: Int
     var firstName: String
     var lastName: String
     var photo100: String
-   
+    var photo200: String
     
     enum CodingKeys: String, CodingKey {
         case id
         case firstName = "first_name"
         case lastName = "last_name"
         case photo100 = "photo_100"
+        case photo200 = "photo_200_orig"
     }
 }
 
@@ -63,5 +41,26 @@ extension Friend: Decodable {
         lastName = try values.decode(String.self, forKey: .lastName)
         firstName = try values.decode(String.self, forKey: .firstName)
         photo100 = try values.decode(String.self, forKey: .photo100)
+        photo200 = try values.decode(String.self, forKey: .photo200)
+    }
+}
+
+extension Friend {
+    var photoUrl: URL {
+        return imageURL()
+    }
+    
+    var photo200Url: URL {
+        return imageURL()
+    }
+  
+    private func imageURL() -> URL {
+        let stringPath = Bundle.main.path(forResource: "dummy", ofType: "png")
+        return URL(string: self.photo100) ?? URL(fileURLWithPath: stringPath!)
+    }
+    
+    private func image200URL() -> URL {
+        let stringPath = Bundle.main.path(forResource: "dummy", ofType: "png")
+        return URL(string: self.photo200) ?? URL(fileURLWithPath: stringPath!)
     }
 }

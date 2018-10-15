@@ -27,7 +27,7 @@ struct App {
         
         static let acccethToken = "8945af0b8945af0b8945af0b3589232ab5889458945af0bd285dbe0506e95fcd2c1e94e"
         
-        static let fields = "first_name, last_name, uid, photo_100"
+        static let fields = "first_name, last_name, uid, photo_100, photo_200_orig"
         
         static let VKAppId = "6718910"
 

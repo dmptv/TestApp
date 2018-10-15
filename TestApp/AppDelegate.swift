@@ -33,6 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         
+        customizeAppearance()
+        
         let loginStoryboard = UIStoryboard.storyboard(.login)
         let loginController: LoginController = loginStoryboard.instantiateViewController()
         
@@ -49,6 +51,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         return true
+    }
+    
+    // MARK - App Theme Customization
+    
+    private func customizeAppearance() {
+        window?.tintColor = UIColor.black
+        UISearchBar.appearance().barTintColor = UIColor.black
+        UINavigationBar.appearance().barTintColor = UIColor.black
+        UINavigationBar.appearance().tintColor = UIColor.white
+        UINavigationBar.appearance().titleTextAttributes = [
+            NSAttributedString.Key(rawValue: NSAttributedString.Key.foregroundColor.rawValue) : UIColor.white]
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {

@@ -8,68 +8,82 @@
 
 import UIKit
 import VK_ios_sdk
+import SDWebImage
 
 class MainController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    let imageView = UIImageView()
+    var userLabel: UILabel!
     
-    var requestUser = VKRequest.init(method: App.Methods.usersGet,
-                                     parameters: [
-        VK_API_FIELDS: App.String.fields,
-        VK_API_USER_IDS: App.Int.userId,
-        VK_API_ACCESS_TOKEN: App.String.acccethToken])
-    
-    var requestFriends = VKRequest.init(method: App.Methods.friendsGet,
-                                        parameters: [
-        VK_API_USER_ID : App.Int.userId,
-        VK_API_COUNT : App.Int.countPerPage,
-        VK_API_FIELDS: App.String.fields,
-        VK_API_ACCESS_TOKEN: App.String.acccethToken])
+    let service: Service = Service()
+    var user: Friend!
+    var friends: [Friend] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "LogOut", style: .plain, target: self, action: #selector(logOut))
+        setupViews()
         
         let instance = VKSdk.initialize(withAppId: App.String.VKAppId)
         instance?.register(self)
         instance?.uiDelegate = self
 
-        requestUser?.execute(resultBlock: { (response) in
-                        
-            let stringJson = response?.responseString.data(using: .utf8)
-            
-            let decoder = JSONDecoder()
-            do {
-                let product = try decoder.decode(Users.self, from: stringJson!)
-                print(product)
+        requests()
+    }
+    
+    fileprivate func setupViews() {
+        setupNavBar()
+        setupTableView()
+        setupHeaderImageView()
+    }
+    
+    private func setupNavBar() {
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "LogOut", style: .plain, target: self, action: #selector(logOut))
+        navigationController?.hidesBarsOnSwipe = true
+    }
+    
+    private func setupTableView() {
+        tableView.estimatedRowHeight = 83
+        tableView.contentInset = UIEdgeInsets(top: 300, left: 0, bottom: 0, right: 0)
+        tableView.backgroundColor = UIColor.darkGray
+    }
+    
+    private func setupHeaderImageView() {
+        imageView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 300)
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        view.addSubview(imageView)
+        
+        userLabel = UILabel(frame: CGRect(x: imageView.frame.minX + 20, y: imageView.frame.maxY - 12, width: imageView.bounds.size.width, height: 30))
+        userLabel.textColor = UIColor.white
+        imageView.addSubview(userLabel)
+        if let user = user {
+            imageView.sd_setImage(with: user.photo200Url, completed: nil)
+            userLabel.text = user.firstName + " " + user.lastName
+        } else {
+            imageView.image = UIImage.init(named: "dummy")
+            userLabel.text = ""
+        }
+    }
+    
+    func requests() {
+        service.getData { [weak self] result in
+            if let user = result, let strongSelf = self {
+                strongSelf.user = user
+                DispatchQueue.main.async {
+                    strongSelf.imageView.sd_setImage(with: user.photo200Url, completed: nil)
+                    strongSelf.userLabel.text = user.firstName + " " + user.lastName
+                }
             }
-            catch {
-                print("error decode: \(error)")
-            }
-            
-        }, errorBlock: { (error) in
-            print(error.debugDescription)
-        })
-     
-        requestFriends?.execute(resultBlock: { (response) in
-            
-            let stringJson = response?.responseString.data(using: .utf8)
-            
-            let decoder = JSONDecoder()
-            do {
-                let product = try decoder.decode(ResponseMessages.self, from: stringJson!)
-                print(product)
-            }
-            catch {
-                print("error decode: \(error)")
-            }
-            
-        }, errorBlock: { (error) in
-            print(error.debugDescription)
-        })
-
+        }
+        
+        service.getFriends { [weak self] result in
+            guard let strongSelf = self else { return }
+            strongSelf.friends = result as! [Friend]
+            strongSelf.tableView.reloadData()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -90,7 +104,52 @@ class MainController: UIViewController {
         
         present(loginController, animated: true, completion: nil)
     }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+    }
+}
 
+extension MainController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return friends.count
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 83.0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.defaultReuseIdentifier, for: indexPath) as! CustomTableViewCell
+        
+        let friend = friends[indexPath.row]
+        
+        cell.contentView.backgroundColor = UIColor.black
+        cell.titleLabel.text = friend.firstName + " " + friend.lastName
+        cell.titleLabel.textColor = .white
+        
+        cell.userImageView.alpha = 0
+        cell.userImageView.sd_setImage(with: friend.photoUrl, completed: { (image, error, cache, url) in
+            cell.userImageView.image = image
+            UIView.animate(withDuration: 0.2, animations: {
+                cell.userImageView.alpha = 1.0
+            })
+        })
+        
+        if indexPath.row == 5 {
+            tableView.layoutIfNeeded()
+        }
+        
+        
+        return cell
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let y = 300 - (scrollView.contentOffset.y + 300)
+        let height = min(max(y, 60), 400)
+        imageView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: height)
+    }
+    
 }
 
 extension MainController: VKSdkDelegate, VKSdkUIDelegate {
@@ -110,19 +169,6 @@ extension MainController: VKSdkDelegate, VKSdkUIDelegate {
     func vkSdkNeedCaptchaEnter(_ captchaError: VKError!) {
         print("captcha Error", captchaError)
     }
-    
-    
-}
-
-extension MainController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
-    }
-    
     
     
 }
