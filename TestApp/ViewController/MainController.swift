@@ -15,8 +15,11 @@ class MainController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     let imageView = UIImageView()
     var userLabel: UILabel!
+//    private lazy var refreshCtrl = UIRefreshControl()
     
+    //TODO: - inject service
     let service: Service = Service()
+    
     var user: Friend!
     var friends: [Friend] = []
 
@@ -30,12 +33,15 @@ class MainController: UIViewController {
         instance?.uiDelegate = self
 
         requests()
+        
     }
     
+    //TODO: - abstarct views
     fileprivate func setupViews() {
         setupNavBar()
         setupTableView()
         setupHeaderImageView()
+        setupRefreshControl()
     }
     
     private func setupNavBar() {
@@ -68,6 +74,25 @@ class MainController: UIViewController {
         }
     }
     
+    private func setupRefreshControl() {
+        let refreshCtrl = UIRefreshControl()
+        refreshCtrl.addTarget(self, action: #selector(updateFriends), for: .valueChanged)
+        refreshCtrl.tintColor = UIColor.white
+        tableView.refreshControl = refreshCtrl
+        tableView.refreshControl?.bounds = CGRect(x: tableView.refreshControl!.bounds.origin.x, y: -50, width: tableView.refreshControl!.bounds.size.width, height: tableView.refreshControl!.bounds.size.height)
+    }
+    
+    @objc func updateFriends() {
+        tableView.refreshControl!.beginRefreshing()
+        
+        service.getFriends { [weak self] result in
+            guard let strongSelf = self else { return }
+            strongSelf.friends = result as! [Friend]
+            strongSelf.tableView.reloadData()
+            strongSelf.tableView.refreshControl!.endRefreshing()
+        }
+    }
+    
     func requests() {
         service.getData { [weak self] result in
             if let user = result, let strongSelf = self {
@@ -79,11 +104,7 @@ class MainController: UIViewController {
             }
         }
         
-        service.getFriends { [weak self] result in
-            guard let strongSelf = self else { return }
-            strongSelf.friends = result as! [Friend]
-            strongSelf.tableView.reloadData()
-        }
+        updateFriends()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -128,19 +149,15 @@ extension MainController: UITableViewDataSource, UITableViewDelegate {
         cell.titleLabel.text = friend.firstName + " " + friend.lastName
         cell.titleLabel.textColor = .white
         
-        cell.userImageView.alpha = 0
-        cell.userImageView.sd_setImage(with: friend.photoUrl, completed: { (image, error, cache, url) in
-            cell.userImageView.image = image
-            UIView.animate(withDuration: 0.2, animations: {
-                cell.userImageView.alpha = 1.0
-            })
-        })
-        
-        if indexPath.row == 5 {
-            tableView.layoutIfNeeded()
-        }
-        
-        
+//        cell.userImageView.alpha = 0
+        cell.userImageView.sd_setImage(with: friend.photoUrl, completed: nil)
+//            { (image, error, cache, url) in
+//            cell.userImageView.image = image
+//            UIView.animate(withDuration: 0.2, animations: {
+//                cell.userImageView.alpha = 1.0
+//            })
+//        })
+  
         return cell
     }
     

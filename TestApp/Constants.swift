@@ -6,7 +6,7 @@
 //  Copyright © 2018 kanat. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 
 struct App {
@@ -59,5 +59,9 @@ struct App {
         static let usersGet = "users.get"
     }
    
+    // MARK: - Colors
     
+    struct Color {
+        static let blue = UIColor.blue
+    }
 }
