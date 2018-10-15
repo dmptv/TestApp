@@ -15,7 +15,6 @@ class MainController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     let imageView = UIImageView()
     var userLabel: UILabel!
-//    private lazy var refreshCtrl = UIRefreshControl()
     
     //TODO: - inject service
     let service: Service = Service()
@@ -83,13 +82,17 @@ class MainController: UIViewController {
     }
     
     @objc func updateFriends() {
-        tableView.refreshControl!.beginRefreshing()
+        if !tableView.refreshControl!.isRefreshing {
+            tableView.refreshControl!.beginRefreshing()
+        }
         
         service.getFriends { [weak self] result in
             guard let strongSelf = self else { return }
             strongSelf.friends = result as! [Friend]
             strongSelf.tableView.reloadData()
-            strongSelf.tableView.refreshControl!.endRefreshing()
+            if strongSelf.tableView.refreshControl!.isRefreshing {
+                strongSelf.tableView.refreshControl!.endRefreshing()
+            }
         }
     }
     
@@ -103,32 +106,24 @@ class MainController: UIViewController {
                 }
             }
         }
-        
         updateFriends()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-
     }
     
     @objc func logOut() {
         print("logged out")
-        
         defaults.set(false, forKey: "UserIsLoggedIn")
-        
         VKSdk.forceLogout()
-        
         let loginStoryboard = UIStoryboard.storyboard(.login)
         let loginController: LoginController = loginStoryboard.instantiateViewController()
-        
         present(loginController, animated: true, completion: nil)
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        
     }
 }
 
@@ -148,16 +143,8 @@ extension MainController: UITableViewDataSource, UITableViewDelegate {
         cell.contentView.backgroundColor = UIColor.black
         cell.titleLabel.text = friend.firstName + " " + friend.lastName
         cell.titleLabel.textColor = .white
-        
-//        cell.userImageView.alpha = 0
         cell.userImageView.sd_setImage(with: friend.photoUrl, completed: nil)
-//            { (image, error, cache, url) in
-//            cell.userImageView.image = image
-//            UIView.animate(withDuration: 0.2, animations: {
-//                cell.userImageView.alpha = 1.0
-//            })
-//        })
-  
+        
         return cell
     }
     
@@ -165,6 +152,19 @@ extension MainController: UITableViewDataSource, UITableViewDelegate {
         let y = 300 - (scrollView.contentOffset.y + 300)
         let height = min(max(y, 60), 400)
         imageView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: height)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        //TODO: - move it to RxFlow
+        let detailStoryboard = UIStoryboard.storyboard(.detail)
+        let detailController: DetailController = detailStoryboard.instantiateViewController()
+        let friend = friends[indexPath.row]
+        detailController.user = friend
+        navigationController?.hidesBarsOnSwipe = false
+        self.show(detailController, sender: self)
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 }

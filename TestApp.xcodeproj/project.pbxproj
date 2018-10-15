@@ -29,6 +29,8 @@
 		9DE2F15E2171F54A00C50703 /* UIStackView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE2F15D2171F54A00C50703 /* UIStackView+Extension.swift */; };
 		9DE2F1602171F56200C50703 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE2F15F2171F56200C50703 /* UIButton+Extension.swift */; };
 		9DE2F1632171F69E00C50703 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE2F1622171F69E00C50703 /* UITextField+Extension.swift */; };
+		9DEA42CB2174EA4800980A18 /* Detail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DEA42CA2174EA4700980A18 /* Detail.storyboard */; };
+		9DEA42CD2174EA8E00980A18 /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA42CC2174EA8E00980A18 /* DetailController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +57,8 @@
 		9DE2F15D2171F54A00C50703 /* UIStackView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extension.swift"; sourceTree = "<group>"; };
 		9DE2F15F2171F56200C50703 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		9DE2F1622171F69E00C50703 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
+		9DEA42CA2174EA4700980A18 /* Detail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Detail.storyboard; sourceTree = "<group>"; };
+		9DEA42CC2174EA8E00980A18 /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
 		A8AED9E7D8AD232EC820B082 /* Pods-TestApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TestApp/Pods-TestApp.debug.xcconfig"; sourceTree = "<group>"; };
 		FADDB62757C6825B313204B4 /* Pods_TestApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TestApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEB2D3B057C484B5F73EA646 /* Pods-TestApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-TestApp/Pods-TestApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -99,13 +103,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		9DA61D3821722ECF002C3F54 /* Storyboard */ = {
+		9DA61D3821722ECF002C3F54 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
 				9DE2F14B2170A4E700C50703 /* Login.storyboard */,
 				9DA61D412172340F002C3F54 /* Main.storyboard */,
+				9DEA42CA2174EA4700980A18 /* Detail.storyboard */,
 			);
-			path = Storyboard;
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 		9DA61D3F2172306E002C3F54 /* Protocol */ = {
@@ -122,6 +127,7 @@
 			children = (
 				9DE2F1492170A4E700C50703 /* LoginController.swift */,
 				9DE2F1592170E22E00C50703 /* MainController.swift */,
+				9DEA42CC2174EA8E00980A18 /* DetailController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -153,7 +159,7 @@
 				9D1036F62173652E0029F0C3 /* Constants.swift */,
 				9DA61D4021723128002C3F54 /* ViewController */,
 				9D1036FD21748DB70029F0C3 /* Views */,
-				9DA61D3821722ECF002C3F54 /* Storyboard */,
+				9DA61D3821722ECF002C3F54 /* Storyboards */,
 				9DA61D3F2172306E002C3F54 /* Protocol */,
 				9DE2F1612171F67900C50703 /* Extensions */,
 				9DE2F14E2170A4E800C50703 /* Assets.xcassets */,
@@ -248,6 +254,7 @@
 				9DE2F1522170A4E800C50703 /* LaunchScreen.storyboard in Resources */,
 				9DA61D422172340F002C3F54 /* Main.storyboard in Resources */,
 				9DE2F14F2170A4E800C50703 /* Assets.xcassets in Resources */,
+				9DEA42CB2174EA4800980A18 /* Detail.storyboard in Resources */,
 				9DE2F14D2170A4E700C50703 /* Login.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -331,6 +338,7 @@
 				9D1036FA21747C330029F0C3 /* CustomTableViewCell.swift in Sources */,
 				9DE2F1602171F56200C50703 /* UIButton+Extension.swift in Sources */,
 				9DA61D3C2172304C002C3F54 /* UIViewController+Extentions.swift in Sources */,
+				9DEA42CD2174EA8E00980A18 /* DetailController.swift in Sources */,
 				9DA61D3A21723031002C3F54 /* UIStoryboard+Storyboards.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
