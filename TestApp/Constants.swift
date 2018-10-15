@@ -9,11 +9,9 @@
 import Foundation
 
 
-//"https://api.vk.com/method/friends.get?user_id=26955116&order=name&count=100&v=5.52"
-
-// https://api.vk.com/method/users.get?user_id=210700286&v=5.52
-
 struct App {
+    
+    // MARK: - Strings
     
     struct String {
         private static let devBaseUrl = "https://api.vk.com/method/"
@@ -28,10 +26,19 @@ struct App {
         }
         
         static let acccethToken = "8945af0b8945af0b8945af0b3589232ab5889458945af0bd285dbe0506e95fcd2c1e94e"
+        
+        static let fields = "first_name, last_name, uid, photo_100"
+        
+        static let VKAppId = "6718910"
+
     }
     
+    // MARK: - Integers
+    
     struct Int {
-        static let userId = 26955116
+        static let userId = 20375184
+        static let countPerPage = 50
+
     }
     
     // MARK: - Environment
@@ -41,8 +48,16 @@ struct App {
         case production
         
         static var current: Environment {
-            return .development // .production
+            return .development
         }
     }
+    
+    // MARK: - Methods
+    
+    struct Methods {
+        static let friendsGet = "friends.get"
+        static let usersGet = "users.get"
+    }
+   
     
 }

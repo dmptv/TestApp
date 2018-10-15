@@ -10,16 +10,22 @@ import UIKit
 import UserNotifications
 import VK_ios_sdk
 
-// https://github.com/VKCOM/vk-ios-sdk
+protocol DataManagerProtocol {
+    var defaults: UserDefaults! { get }
+}
+
+extension DataManagerProtocol {
+    var defaults: UserDefaults! {
+        return (UIApplication.shared.delegate as? AppDelegate)?.defaults
+    }
+}
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    
-    static let VKAppId = "6718910"
-    
-    let defaults = UserDefaults.standard
+        
+    lazy var defaults = UserDefaults.standard
     var userIsLoggedIn: Bool?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -50,7 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let ret: Bool = VKSdk.processOpen(url, fromApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String)
         print(ret)
         
-        return true // ret
+        return true
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {

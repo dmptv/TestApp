@@ -9,35 +9,65 @@
 import UIKit
 import VK_ios_sdk
 
-
 class MainController: UIViewController {
     
-    typealias JSONDictionary = [String: Any]
+    @IBOutlet weak var tableView: UITableView!
     
-    let defaults = UserDefaults.standard
+    var requestUser = VKRequest.init(method: App.Methods.usersGet,
+                                     parameters: [
+        VK_API_FIELDS: App.String.fields,
+        VK_API_USER_IDS: App.Int.userId,
+        VK_API_ACCESS_TOKEN: App.String.acccethToken])
     
-    var requestFriends = VKRequest.init(method: "friends.get", parameters: [
+    var requestFriends = VKRequest.init(method: App.Methods.friendsGet,
+                                        parameters: [
         VK_API_USER_ID : App.Int.userId,
-        VK_API_COUNT : 50,
+        VK_API_COUNT : App.Int.countPerPage,
+        VK_API_FIELDS: App.String.fields,
         VK_API_ACCESS_TOKEN: App.String.acccethToken])
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .blue
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "LogOut", style: .plain, target: self, action: #selector(logOut))
         
-        let instance = VKSdk.initialize(withAppId: AppDelegate.VKAppId)
+        let instance = VKSdk.initialize(withAppId: App.String.VKAppId)
         instance?.register(self)
         instance?.uiDelegate = self
-        
+
+        requestUser?.execute(resultBlock: { (response) in
+                        
+            let stringJson = response?.responseString.data(using: .utf8)
+            
+            let decoder = JSONDecoder()
+            do {
+                let product = try decoder.decode(Users.self, from: stringJson!)
+                print(product)
+            }
+            catch {
+                print("error decode: \(error)")
+            }
+            
+        }, errorBlock: { (error) in
+            print(error.debugDescription)
+        })
+     
         requestFriends?.execute(resultBlock: { (response) in
             
-            print("friends", response?.responseString)
+            let stringJson = response?.responseString.data(using: .utf8)
             
-        }, errorBlock: { (Error) in
-            print(Error.debugDescription)
+            let decoder = JSONDecoder()
+            do {
+                let product = try decoder.decode(ResponseMessages.self, from: stringJson!)
+                print(product)
+            }
+            catch {
+                print("error decode: \(error)")
+            }
+            
+        }, errorBlock: { (error) in
+            print(error.debugDescription)
         })
 
     }
@@ -52,6 +82,8 @@ class MainController: UIViewController {
         print("logged out")
         
         defaults.set(false, forKey: "UserIsLoggedIn")
+        
+        VKSdk.forceLogout()
         
         let loginStoryboard = UIStoryboard.storyboard(.login)
         let loginController: LoginController = loginStoryboard.instantiateViewController()
@@ -78,6 +110,19 @@ extension MainController: VKSdkDelegate, VKSdkUIDelegate {
     func vkSdkNeedCaptchaEnter(_ captchaError: VKError!) {
         print("captcha Error", captchaError)
     }
+    
+    
+}
+
+extension MainController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
+    
     
     
 }

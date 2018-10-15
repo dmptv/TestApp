@@ -10,16 +10,18 @@ import UIKit
 import VK_ios_sdk
 
 class LoginController: UIViewController {
+    @IBOutlet weak var loginButton: UIButton!
     
     private let vkPerm = [VK_PER_FRIENDS, VK_PER_PHOTOS]
-    let defaults = UserDefaults.standard
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        view.backgroundColor = .yellow
-
-        let instance = VKSdk.initialize(withAppId: AppDelegate.VKAppId)
+        let instance = VKSdk.initialize(withAppId: App.String.VKAppId)
         instance?.register(self)
         instance?.uiDelegate = self
     }
@@ -28,9 +30,9 @@ class LoginController: UIViewController {
         VKSdk.wakeUpSession(vkPerm, complete: { (state, error) in
             if (state ==  VKAuthorizationState.authorized) {
                 print("wakeUpSession")
-
+                
                 self.defaults.set(true, forKey: "UserIsLoggedIn")
-
+                
                 let mainStoryboard = UIStoryboard.storyboard(.main)
                 let mainController: MainController = mainStoryboard.instantiateViewController()
                 let mainNavController = UINavigationController(rootViewController: mainController)
@@ -39,9 +41,6 @@ class LoginController: UIViewController {
 
             } else {
                 VKSdk.authorize(self.vkPerm, with: .disableSafariController)
-                DispatchQueue.main.async {
-                    sender.isHidden = true
-                }
             }
         })
         
@@ -52,6 +51,9 @@ class LoginController: UIViewController {
 extension LoginController: VKSdkDelegate, VKSdkUIDelegate {
     func vkSdkAccessAuthorizationFinished(with result: VKAuthorizationResult!) {
         print("vkSdk Access Authorization Finished")
+        if result.token != nil {
+            loginButton.setTitle("Enter", for: .normal)
+        }
     }
     
     func vkSdkUserAuthorizationFailed() {

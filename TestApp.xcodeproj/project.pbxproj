@@ -12,7 +12,7 @@
 		9D1036F52173630B0029F0C3 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1036F42173630B0029F0C3 /* Friend.swift */; };
 		9D1036F72173652E0029F0C3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1036F62173652E0029F0C3 /* Constants.swift */; };
 		9DA61D3A21723031002C3F54 /* UIStoryboard+Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA61D3921723031002C3F54 /* UIStoryboard+Storyboards.swift */; };
-		9DA61D3C2172304C002C3F54 /* UIViewController+StoryboardIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA61D3B2172304C002C3F54 /* UIViewController+StoryboardIdentifier.swift */; };
+		9DA61D3C2172304C002C3F54 /* UIViewController+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA61D3B2172304C002C3F54 /* UIViewController+Extentions.swift */; };
 		9DA61D3E21723069002C3F54 /* StoryboardIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA61D3D21723069002C3F54 /* StoryboardIdentifiable.swift */; };
 		9DA61D422172340F002C3F54 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DA61D412172340F002C3F54 /* Main.storyboard */; };
 		9DE2F1482170A4E700C50703 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE2F1472170A4E700C50703 /* AppDelegate.swift */; };
@@ -32,7 +32,7 @@
 		9D1036F42173630B0029F0C3 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		9D1036F62173652E0029F0C3 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		9DA61D3921723031002C3F54 /* UIStoryboard+Storyboards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Storyboards.swift"; sourceTree = "<group>"; };
-		9DA61D3B2172304C002C3F54 /* UIViewController+StoryboardIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+StoryboardIdentifier.swift"; sourceTree = "<group>"; };
+		9DA61D3B2172304C002C3F54 /* UIViewController+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extentions.swift"; sourceTree = "<group>"; };
 		9DA61D3D21723069002C3F54 /* StoryboardIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardIdentifiable.swift; sourceTree = "<group>"; };
 		9DA61D412172340F002C3F54 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		9DE2F1442170A4E700C50703 /* TestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -143,7 +143,7 @@
 				9DE2F15F2171F56200C50703 /* UIButton+Extension.swift */,
 				9DE2F1622171F69E00C50703 /* UITextField+Extension.swift */,
 				9DA61D3921723031002C3F54 /* UIStoryboard+Storyboards.swift */,
-				9DA61D3B2172304C002C3F54 /* UIViewController+StoryboardIdentifier.swift */,
+				9DA61D3B2172304C002C3F54 /* UIViewController+Extentions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -296,7 +296,7 @@
 				9DE2F15E2171F54A00C50703 /* UIStackView+Extension.swift in Sources */,
 				9DE2F15C2171F52000C50703 /* SafeAreaLayout+Extension.swift in Sources */,
 				9DE2F1602171F56200C50703 /* UIButton+Extension.swift in Sources */,
-				9DA61D3C2172304C002C3F54 /* UIViewController+StoryboardIdentifier.swift in Sources */,
+				9DA61D3C2172304C002C3F54 /* UIViewController+Extentions.swift in Sources */,
 				9DA61D3A21723031002C3F54 /* UIStoryboard+Storyboards.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

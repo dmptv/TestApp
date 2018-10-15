@@ -9,3 +9,5 @@
 import UIKit
 
 extension UIViewController : StoryboardIdentifiable { }
+
+extension UIViewController : DataManagerProtocol { }
