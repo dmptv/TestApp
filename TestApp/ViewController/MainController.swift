@@ -21,17 +21,17 @@ class MainController: UIViewController {
     
     var user: Friend? {
         didSet {
-            if let user = user {
-                DispatchQueue.main.async { [weak self] in
-                    guard let strongSelf = self else { return }
-                    strongSelf.imageView.sd_setImage(with: user.photo200Url, completed: nil)
-                    strongSelf.userLabel.text = user.firstName + " " + user.lastName
-                }
-            }
+            updateHeaderViews()
         }
     }
     
     var friends: [Friend] = []
+    
+    var indexPathToReload: IndexPath?
+    
+    func setupImage(user: Friend, imageView: UIImageView) {
+        imageView.sd_setImage(with: user.photo200Url, completed: nil)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,13 +78,6 @@ class MainController: UIViewController {
         userLabel = UILabel(frame: CGRect(x: imageView.frame.minX + 20, y: imageView.frame.maxY - 12, width: imageView.bounds.size.width, height: 30))
         userLabel.textColor = UIColor.white
         imageView.addSubview(userLabel)
-        if let user = user {
-            imageView.sd_setImage(with: user.photo200Url, completed: nil)
-            userLabel.text = user.firstName + " " + user.lastName
-        } else {
-            imageView.image = UIImage.init(named: "dummy")
-            userLabel.text = ""
-        }
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         imageView.addGestureRecognizer(tapGesture)
@@ -133,6 +126,23 @@ class MainController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        if let indexPath = indexPathToReload {
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+        }
+        
+        updateHeaderViews()
+    }
+    
+    private func updateHeaderViews() {
+        if let user = user {
+            DispatchQueue.main.async { [weak self] in
+                guard let strongSelf = self else { return }
+                
+                strongSelf.setupImage(user: user, imageView: strongSelf.imageView)
+                strongSelf.userLabel.text = user.firstName + " " + user.lastName
+            }
+        }
     }
     
     @objc func logOut() {
@@ -144,9 +154,6 @@ class MainController: UIViewController {
         present(loginController, animated: true, completion: nil)
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-    }
 }
 
 extension MainController: UITableViewDataSource, UITableViewDelegate {
@@ -165,7 +172,7 @@ extension MainController: UITableViewDataSource, UITableViewDelegate {
         cell.contentView.backgroundColor = UIColor.black
         cell.titleLabel.text = friend.firstName + " " + friend.lastName
         cell.titleLabel.textColor = .white
-        cell.userImageView.sd_setImage(with: friend.photoUrl, completed: nil)
+        setupImage(user: friend, imageView: cell.userImageView)
         
         return cell
     }
@@ -182,6 +189,9 @@ extension MainController: UITableViewDataSource, UITableViewDelegate {
         let detailController: DetailController = detailStoryboard.instantiateViewController()
         let friend = friends[indexPath.row]
         detailController.user = friend
+        
+        indexPathToReload = indexPath
+        
         self.show(detailController, sender: self)
         
         tableView.deselectRow(at: indexPath, animated: true)

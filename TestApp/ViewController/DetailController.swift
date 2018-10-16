@@ -9,8 +9,7 @@
 import UIKit
 import VK_ios_sdk
 import SDWebImage
-import YangMingShan
-
+import Photos
 
 class DetailController: UIViewController {
     
@@ -19,12 +18,13 @@ class DetailController: UIViewController {
     @IBOutlet weak var addPhotoButton: UIButton!
     
     //TODO: - inject
-    var user: Friend!
-    
+    var user: FriendWithCustomImageProtocol!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if let user = user {
+            
             profilImageview.sd_setImage(with: user.photo200Url, completed: nil)
             usernameLabel.text = user.firstName + " " + user.lastName
         } else {
@@ -33,50 +33,24 @@ class DetailController: UIViewController {
         
     }
 
+    
     @IBAction func addPhoto(_ sender: UIButton) {
-        self.yms_presentAlbumPhotoView(with: self)
-    }
- 
-    
-}
-
-
-extension DetailController: YMSPhotoPickerViewControllerDelegate {
-    
-    func photoPickerViewControllerDidReceivePhotoAlbumAccessDenied(_ picker: YMSPhotoPickerViewController!) {
-        let alertController = UIAlertController.init(title: "Allow photo album access?", message: "Need your permission to access photo albumbs", preferredStyle: .alert)
-        let dismissAction = UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil)
-        let settingsAction = UIAlertAction.init(title: "Settings", style: .default) { (action) in
-            UIApplication.shared.open(URL.init(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: { bool in })
-        }
-        alertController.addAction(dismissAction)
-        alertController.addAction(settingsAction)
+        //TODO: - inject
+        let layout = UICollectionViewFlowLayout()
+        let photoSelectorController = PhotoSelectorController(collectionViewLayout: layout)
+        let navController = UINavigationController(rootViewController: photoSelectorController)
         
-        self.present(alertController, animated: true, completion: nil)
-    }
-    
-    func photoPickerViewControllerDidReceiveCameraAccessDenied(_ picker: YMSPhotoPickerViewController!) {
-        let alertController = UIAlertController.init(title: "Allow camera album access?", message: "Need your permission to take a photo", preferredStyle: .alert)
-        let dismissAction = UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil)
-        let settingsAction = UIAlertAction.init(title: "Settings", style: .default) { (action) in
-            UIApplication.shared.open(URL.init(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: { bool in })
-        }
-        alertController.addAction(dismissAction)
-        alertController.addAction(settingsAction)
-     
-        picker.present(alertController, animated: true, completion: nil)
-    }
-    
-    func photoPickerViewController(_ picker: YMSPhotoPickerViewController!, didFinishPicking image: UIImage!) {
-        picker.dismiss(animated: true) {
+        photoSelectorController.didTapNext = { [weak self] image in
             DispatchQueue.main.async {
-                self.profilImageview.image = image
+               self?.profilImageview.image = image
             }
         }
-    }
+        present(navController, animated: true, completion: nil)
 
-    
+    }
 }
+
+
 
 
 

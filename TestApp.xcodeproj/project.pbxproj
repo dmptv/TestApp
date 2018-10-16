@@ -15,6 +15,10 @@
 		9D1036FC21748D200029F0C3 /* ReuseIdentifierProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1036FB21748D200029F0C3 /* ReuseIdentifierProtocol.swift */; };
 		9D1036FF21749CC70029F0C3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1036FE21749CC70029F0C3 /* User.swift */; };
 		9D10370221749D0A0029F0C3 /* ResponseMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D10370121749D0A0029F0C3 /* ResponseMessages.swift */; };
+		9D64067721761C0400118AEE /* PhotoSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D64067621761C0400118AEE /* PhotoSelectorController.swift */; };
+		9D64067921761C9800118AEE /* PhotoSelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D64067821761C9800118AEE /* PhotoSelectorCell.swift */; };
+		9D64067B21761CD200118AEE /* UIView+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D64067A21761CD200118AEE /* UIView+Extentions.swift */; };
+		9D64067D21761D0100118AEE /* PhotoSelectorHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D64067C21761D0100118AEE /* PhotoSelectorHeader.swift */; };
 		9DA61D3A21723031002C3F54 /* UIStoryboard+Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA61D3921723031002C3F54 /* UIStoryboard+Storyboards.swift */; };
 		9DA61D3C2172304C002C3F54 /* UIViewController+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA61D3B2172304C002C3F54 /* UIViewController+Extentions.swift */; };
 		9DA61D3E21723069002C3F54 /* StoryboardIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA61D3D21723069002C3F54 /* StoryboardIdentifiable.swift */; };
@@ -42,6 +46,10 @@
 		9D1036FB21748D200029F0C3 /* ReuseIdentifierProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseIdentifierProtocol.swift; sourceTree = "<group>"; };
 		9D1036FE21749CC70029F0C3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9D10370121749D0A0029F0C3 /* ResponseMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseMessages.swift; sourceTree = "<group>"; };
+		9D64067621761C0400118AEE /* PhotoSelectorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorController.swift; sourceTree = "<group>"; };
+		9D64067821761C9800118AEE /* PhotoSelectorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorCell.swift; sourceTree = "<group>"; };
+		9D64067A21761CD200118AEE /* UIView+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extentions.swift"; sourceTree = "<group>"; };
+		9D64067C21761D0100118AEE /* PhotoSelectorHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorHeader.swift; sourceTree = "<group>"; };
 		9DA61D3921723031002C3F54 /* UIStoryboard+Storyboards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Storyboards.swift"; sourceTree = "<group>"; };
 		9DA61D3B2172304C002C3F54 /* UIViewController+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extentions.swift"; sourceTree = "<group>"; };
 		9DA61D3D21723069002C3F54 /* StoryboardIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardIdentifiable.swift; sourceTree = "<group>"; };
@@ -91,7 +99,9 @@
 			isa = PBXGroup;
 			children = (
 				9D1036F921747C330029F0C3 /* CustomTableViewCell.swift */,
+				9D64067C21761D0100118AEE /* PhotoSelectorHeader.swift */,
 				9DEA42CF2175B54200980A18 /* CustomTableViewCell.xib */,
+				9D64067821761C9800118AEE /* PhotoSelectorCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -121,6 +131,8 @@
 			children = (
 				9DA61D3D21723069002C3F54 /* StoryboardIdentifiable.swift */,
 				9D1036FB21748D200029F0C3 /* ReuseIdentifierProtocol.swift */,
+				9DA61D3B2172304C002C3F54 /* UIViewController+Extentions.swift */,
+				9DA61D3921723031002C3F54 /* UIStoryboard+Storyboards.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -131,6 +143,7 @@
 				9DE2F1492170A4E700C50703 /* LoginController.swift */,
 				9DE2F1592170E22E00C50703 /* MainController.swift */,
 				9DEA42CC2174EA8E00980A18 /* DetailController.swift */,
+				9D64067621761C0400118AEE /* PhotoSelectorController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -179,8 +192,7 @@
 				9DE2F15D2171F54A00C50703 /* UIStackView+Extension.swift */,
 				9DE2F15F2171F56200C50703 /* UIButton+Extension.swift */,
 				9DE2F1622171F69E00C50703 /* UITextField+Extension.swift */,
-				9DA61D3921723031002C3F54 /* UIStoryboard+Storyboards.swift */,
-				9DA61D3B2172304C002C3F54 /* UIViewController+Extentions.swift */,
+				9D64067A21761CD200118AEE /* UIView+Extentions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -238,6 +250,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 9DE2F13B2170A4E700C50703;
 			productRefGroup = 9DE2F1452170A4E700C50703 /* Products */;
@@ -293,13 +306,11 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-TestApp/Pods-TestApp-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/VK-ios-sdk/VK_ios_sdk.framework",
-				"${BUILT_PRODUCTS_DIR}/YangMingShan/YangMingShan.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VK_ios_sdk.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YangMingShan.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -331,12 +342,15 @@
 				9D10370221749D0A0029F0C3 /* ResponseMessages.swift in Sources */,
 				9DE2F14A2170A4E700C50703 /* LoginController.swift in Sources */,
 				9DE2F15A2170E22E00C50703 /* MainController.swift in Sources */,
+				9D64067B21761CD200118AEE /* UIView+Extentions.swift in Sources */,
 				9DE2F1632171F69E00C50703 /* UITextField+Extension.swift in Sources */,
 				9D1036F52173630B0029F0C3 /* Friend.swift in Sources */,
+				9D64067D21761D0100118AEE /* PhotoSelectorHeader.swift in Sources */,
 				9DE2F1482170A4E700C50703 /* AppDelegate.swift in Sources */,
 				9D1036F3217362850029F0C3 /* Service.swift in Sources */,
 				9DA61D3E21723069002C3F54 /* StoryboardIdentifiable.swift in Sources */,
 				9D1036F72173652E0029F0C3 /* Constants.swift in Sources */,
+				9D64067921761C9800118AEE /* PhotoSelectorCell.swift in Sources */,
 				9D1036FF21749CC70029F0C3 /* User.swift in Sources */,
 				9DE2F15E2171F54A00C50703 /* UIStackView+Extension.swift in Sources */,
 				9DE2F15C2171F52000C50703 /* SafeAreaLayout+Extension.swift in Sources */,
@@ -344,6 +358,7 @@
 				9D1036FA21747C330029F0C3 /* CustomTableViewCell.swift in Sources */,
 				9DE2F1602171F56200C50703 /* UIButton+Extension.swift in Sources */,
 				9DA61D3C2172304C002C3F54 /* UIViewController+Extentions.swift in Sources */,
+				9D64067721761C0400118AEE /* PhotoSelectorController.swift in Sources */,
 				9DEA42CD2174EA8E00980A18 /* DetailController.swift in Sources */,
 				9DA61D3A21723031002C3F54 /* UIStoryboard+Storyboards.swift in Sources */,
 			);
@@ -495,7 +510,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TV52855HY8;
 				INFOPLIST_FILE = TestApp/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kanat.Blocks;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -511,7 +529,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TV52855HY8;
 				INFOPLIST_FILE = TestApp/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.kanat.Blocks;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;

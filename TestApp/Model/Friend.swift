@@ -6,9 +6,32 @@
 //  Copyright © 2018 kanat. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-struct Friend {
+protocol FriendWithCustomImageProtocol {
+    var customImage: UIImage? { get set }
+    var id: Int { get set }
+    var firstName: String { get set }
+    var lastName: String { get set }
+    var photo100: String { get set }
+    var photo200: String { get set }
+    
+    var photoUrl: URL { get }
+    var photo200Url: URL { get }
+}
+
+extension FriendWithCustomImageProtocol {
+    var customImage: UIImage? {
+        get {
+            return customImage
+        }
+        set (newImage) {
+            customImage = newImage
+        }
+    }
+}
+
+struct Friend: FriendWithCustomImageProtocol {
     var id: Int
     var firstName: String
     var lastName: String
