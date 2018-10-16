@@ -19,7 +19,7 @@ class DetailController: UIViewController {
     
     //TODO: - inject
     var user: FriendWithCustomImageProtocol!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,6 +41,15 @@ class DetailController: UIViewController {
         
     }
     
+    @IBAction func takePhoto(_ sender: UIButton) {
+        let vc = UIImagePickerController()
+        
+        vc.sourceType = .camera
+        vc.allowsEditing = true
+        vc.delegate = self
+        present(vc, animated: true)
+    }
+    
     @IBAction func addPhoto(_ sender: UIButton) {
         //TODO: - inject
         let layout = UICollectionViewFlowLayout()
@@ -57,6 +66,56 @@ class DetailController: UIViewController {
     }
 }
 
+extension DetailController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true)
+        
+        guard let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else {
+            print("No image found")
+            return
+        }
+    
+        
+        UIImageWriteToSavedPhotosAlbum(image, self, #selector(DetailController.image(_:didFinishSavingWithError:contextInfo:)), nil)
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.profilImageview.image = image
+        }
+        
+    }
+    
+    fileprivate func assetsFetchOptions() -> PHFetchOptions {
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.fetchLimit = 1
+        let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
+        fetchOptions.sortDescriptors = [sortDescriptor]
+        return fetchOptions
+    }
+    
+    @objc
+    func image(_ image: UIImage, didFinishSavingWithError error: NSError?,
+               contextInfo: UnsafeRawPointer) {
+
+        let allPhotos = PHAsset.fetchAssets(with: .image, options: assetsFetchOptions())
+        let asset = allPhotos[0]
+        
+        let imageManager = PHImageManager.default()
+        let targetSize = CGSize(width: 600, height: 600)
+        imageManager.requestImage(for: asset,
+                                  targetSize: targetSize,
+                                  contentMode: .default,
+                                  options: nil,
+                                  resultHandler:
+            { [weak self] (image, info) in
+                guard let strSelf = self else { return }
+                
+                GlobalData.sharedInstance.dataRefenciesDict[strSelf.user.id] = asset.localIdentifier
+        })
+        
+    }
+    
+  
+}
 
 
 

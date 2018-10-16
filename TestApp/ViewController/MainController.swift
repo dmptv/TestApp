@@ -136,20 +136,7 @@ class MainController: UIViewController {
         if let user = user {
             DispatchQueue.main.async { [weak self] in
                 guard let strongSelf = self else { return }
-                
-//                if let identifier = GlobalData.sharedInstance.dataRefenciesDict[user.id] {
-//                    GlobalData.sharedInstance.fetchAsset(for: identifier, completion: { (image) in
-//                        DispatchQueue.main.async {
-//                            strongSelf.imageView.image = image
-//                        }
-//                    })
-//
-//                } else {
-//                    strongSelf.setupImage(user: user, imageView: strongSelf.imageView)
-//                }
-                
                 strongSelf.loadImageForId(user, imageView: strongSelf.imageView)
-                
                 strongSelf.userLabel.text = user.firstName + " " + user.lastName
             }
         }
@@ -205,12 +192,7 @@ extension MainController: UITableViewDataSource, UITableViewDelegate {
         cell.titleLabel.text = friend.firstName + " " + friend.lastName
         cell.titleLabel.textColor = .white
         loadImageForId(friend, imageView: cell.userImageView)
-        
-//        if let identifier = GlobalData.sharedInstance.dataRefenciesDict[friend.id] {
-//        } else {
-//           setupImage(user: friend, imageView: cell.userImageView)
-//        }
-        
+
         return cell
     }
     

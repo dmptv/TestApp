@@ -30,20 +30,42 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dTb-iS-ZxZ">
                                 <rect key="frame" x="20" y="84" width="335" height="543"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hot-mV-m5J">
-                                        <rect key="frame" x="8" y="460" width="319" height="75"/>
-                                        <color key="backgroundColor" red="0.27450981740000002" green="0.48627451059999999" blue="0.1411764771" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="pfg-5Z-koB">
+                                        <rect key="frame" x="0.0" y="468" width="335" height="75"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hot-mV-m5J">
+                                                <rect key="frame" x="0.0" y="0.0" width="166.5" height="75"/>
+                                                <color key="backgroundColor" red="0.27450981740000002" green="0.48627451059999999" blue="0.1411764771" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="75" id="nwV-7K-GFw"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                                <state key="normal" title="Select Photo">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="addPhoto:" destination="Yd6-Fc-qSj" eventType="touchUpInside" id="nNG-Ar-cqG"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2o2-Rg-ZgA">
+                                                <rect key="frame" x="168.5" y="0.0" width="166.5" height="75"/>
+                                                <color key="backgroundColor" red="0.13196028139999999" green="0.71541597580000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="75" id="8It-yS-zOS"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                                <state key="normal" title="Take Photo">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="takePhoto:" destination="Yd6-Fc-qSj" eventType="touchUpInside" id="Pyt-eg-LGk"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="75" id="nwV-7K-GFw"/>
+                                            <constraint firstAttribute="height" constant="75" id="6rr-CR-jHU"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                        <state key="normal" title="Take Photo">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="addPhoto:" destination="Yd6-Fc-qSj" eventType="touchUpInside" id="nNG-Ar-cqG"/>
-                                        </connections>
-                                    </button>
+                                    </stackView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dummy" translatesAutoresizingMaskIntoConstraints="NO" id="fUE-OC-ngQ">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="140"/>
                                         <constraints>
@@ -62,12 +84,12 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.9248493020304569" green="0.9248493020304569" blue="0.9248493020304569" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="Hot-mV-m5J" secondAttribute="trailing" constant="8" id="Btg-sf-QpS"/>
+                                    <constraint firstAttribute="bottom" secondItem="pfg-5Z-koB" secondAttribute="bottom" id="CCI-Gw-K01"/>
                                     <constraint firstItem="5lb-a2-sPO" firstAttribute="top" secondItem="fUE-OC-ngQ" secondAttribute="bottom" constant="30" id="KnW-tk-QAc"/>
                                     <constraint firstAttribute="trailing" secondItem="fUE-OC-ngQ" secondAttribute="trailing" id="RGE-Yy-VhS"/>
-                                    <constraint firstAttribute="bottom" secondItem="Hot-mV-m5J" secondAttribute="bottom" constant="8" id="V6F-Jm-HiZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="pfg-5Z-koB" secondAttribute="trailing" id="RVp-AC-OEn"/>
                                     <constraint firstAttribute="trailing" secondItem="5lb-a2-sPO" secondAttribute="trailing" constant="24" id="Vpm-ci-juE"/>
-                                    <constraint firstItem="Hot-mV-m5J" firstAttribute="leading" secondItem="dTb-iS-ZxZ" secondAttribute="leading" constant="8" id="ddK-nG-uvp"/>
+                                    <constraint firstItem="pfg-5Z-koB" firstAttribute="leading" secondItem="dTb-iS-ZxZ" secondAttribute="leading" id="XRB-hj-OHb"/>
                                     <constraint firstItem="fUE-OC-ngQ" firstAttribute="top" secondItem="dTb-iS-ZxZ" secondAttribute="top" id="jk7-BB-lcm"/>
                                     <constraint firstItem="fUE-OC-ngQ" firstAttribute="leading" secondItem="dTb-iS-ZxZ" secondAttribute="leading" id="prl-vc-Qzp"/>
                                     <constraint firstItem="5lb-a2-sPO" firstAttribute="leading" secondItem="dTb-iS-ZxZ" secondAttribute="leading" constant="24" id="wty-kc-azT"/>

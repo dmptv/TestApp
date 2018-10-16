@@ -53,6 +53,7 @@ extension LoginController: VKSdkDelegate, VKSdkUIDelegate {
         print("vkSdk Access Authorization Finished")
         if result.token != nil {
             loginButton.setTitle("Enter", for: .normal)
+            loginButton.backgroundColor = .blue
         }
     }
     
