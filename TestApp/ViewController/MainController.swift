@@ -179,6 +179,7 @@ class MainController: UIViewController {
         print("logged out")
         defaults.set(false, forKey: "UserIsLoggedIn")
         VKSdk.forceLogout()
+        GlobalData.sharedInstance.dataRefenciesDict.removeAll()
         let loginStoryboard = UIStoryboard.storyboard(.login)
         let loginController: LoginController = loginStoryboard.instantiateViewController()
         present(loginController, animated: true, completion: nil)

@@ -33,7 +33,6 @@ class DetailController: UIViewController {
                 
             } else {
                 profilImageview.sd_setImage(with: user.photo200Url, completed: nil)
-
             }
             usernameLabel.text = user.firstName + " " + user.lastName
         } else {
@@ -41,7 +40,6 @@ class DetailController: UIViewController {
         }
         
     }
-
     
     @IBAction func addPhoto(_ sender: UIButton) {
         //TODO: - inject
