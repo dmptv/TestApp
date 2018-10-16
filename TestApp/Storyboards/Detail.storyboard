@@ -37,7 +37,7 @@
                                             <constraint firstAttribute="height" constant="75" id="nwV-7K-GFw"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                        <state key="normal" title="Add Photo">
+                                        <state key="normal" title="Take Photo">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
