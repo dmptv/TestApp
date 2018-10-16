@@ -29,10 +29,7 @@ class MainController: UIViewController {
     var friends: [Friend] = []
     
     var indexPathToReload: IndexPath?
-    
-    func setupImage(user: Friend, imageView: UIImageView) {
-        imageView.sd_setImage(with: user.photo200Url, completed: nil)
-    }
+   
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -140,40 +137,42 @@ class MainController: UIViewController {
             DispatchQueue.main.async { [weak self] in
                 guard let strongSelf = self else { return }
                 
-                if let identifier = GlobalData.sharedInstance.dataRefenciesDict[user.id] {
-                    let allPhotos = PHAsset.fetchAssets(withLocalIdentifiers: [identifier], options: PHFetchOptions.init())
-                    
-                    DispatchQueue.global(qos: .background).async {
-                        allPhotos.enumerateObjects({ (asset, count, stop) in
-                            let imageManager = PHImageManager.default()
-                            let targetSize = CGSize(width: 200, height: 200)
-                            let options = PHImageRequestOptions()
-                            options.isSynchronous = true
-                            imageManager.requestImage(for: asset,
-                                                      targetSize: targetSize,
-                                                      contentMode: .aspectFit,
-                                                      options: options,
-                                                      resultHandler:
-                                { (image, info) in
-                                    
-                                    if let image = image {
-                                        DispatchQueue.main.async {
-                                            strongSelf.imageView.image = image
-                                        }
-                                    }
-                            })
-                            
-                        })
-                    }
-                    
-                    
-                } else {
-                    strongSelf.setupImage(user: user, imageView: strongSelf.imageView)
-                }
+//                if let identifier = GlobalData.sharedInstance.dataRefenciesDict[user.id] {
+//                    GlobalData.sharedInstance.fetchAsset(for: identifier, completion: { (image) in
+//                        DispatchQueue.main.async {
+//                            strongSelf.imageView.image = image
+//                        }
+//                    })
+//
+//                } else {
+//                    strongSelf.setupImage(user: user, imageView: strongSelf.imageView)
+//                }
+                
+                strongSelf.loadImageForId(user, imageView: strongSelf.imageView)
                 
                 strongSelf.userLabel.text = user.firstName + " " + user.lastName
             }
         }
+    }
+    
+    
+    //MARK: - Helpers
+    
+    private func loadImageForId(_ user: Friend, imageView: UIImageView) {
+        if let identifier = GlobalData.sharedInstance.dataRefenciesDict[user.id] {
+            GlobalData.sharedInstance.fetchAsset(for: identifier, completion: { (image) in
+                DispatchQueue.main.async {
+                    imageView.image = image
+                }
+            })
+            
+        } else {
+            setupImage(user: user, imageView: imageView)
+        }
+    }
+    
+    func setupImage(user: Friend, imageView: UIImageView) {
+        imageView.sd_setImage(with: user.photo200Url, completed: nil)
     }
     
     @objc func logOut() {
@@ -186,6 +185,7 @@ class MainController: UIViewController {
     }
     
 }
+
 
 extension MainController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -203,12 +203,12 @@ extension MainController: UITableViewDataSource, UITableViewDelegate {
         cell.contentView.backgroundColor = UIColor.black
         cell.titleLabel.text = friend.firstName + " " + friend.lastName
         cell.titleLabel.textColor = .white
+        loadImageForId(friend, imageView: cell.userImageView)
         
-        if let identifier = GlobalData.sharedInstance.dataRefenciesDict[friend.id] {
-            print(" local identifier", identifier)
-        } else {
-           setupImage(user: friend, imageView: cell.userImageView)
-        }
+//        if let identifier = GlobalData.sharedInstance.dataRefenciesDict[friend.id] {
+//        } else {
+//           setupImage(user: friend, imageView: cell.userImageView)
+//        }
         
         return cell
     }
