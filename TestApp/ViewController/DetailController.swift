@@ -24,8 +24,17 @@ class DetailController: UIViewController {
         super.viewDidLoad()
         
         if let user = user {
-            
-            profilImageview.sd_setImage(with: user.photo200Url, completed: nil)
+            if let identifier = GlobalData.sharedInstance.dataRefenciesDict[user.id] {
+                GlobalData.sharedInstance.fetchAsset(for: identifier, completion: { (image) in
+                    DispatchQueue.main.async { [weak self] in
+                        self?.profilImageview.image = image
+                    }
+                })
+                
+            } else {
+                profilImageview.sd_setImage(with: user.photo200Url, completed: nil)
+
+            }
             usernameLabel.text = user.firstName + " " + user.lastName
         } else {
             usernameLabel.text = "Unknown"
