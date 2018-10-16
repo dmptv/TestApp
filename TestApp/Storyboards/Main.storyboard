@@ -17,47 +17,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="83" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gvd-Lg-5c8">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gvd-Lg-5c8">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CustomTableViewCell" rowHeight="83" id="zbV-ve-pLG" customClass="CustomTableViewCell" customModule="TestApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="83"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zbV-ve-pLG" id="lk4-Jq-l3T">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="82.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Павел Дуров" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a3C-9k-y3o">
-                                                    <rect key="frame" x="104" y="10" width="259" height="62.5"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="17"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dummy" translatesAutoresizingMaskIntoConstraints="NO" id="Wws-sM-f4h">
-                                                    <rect key="frame" x="16" y="3.5" width="76" height="76"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="76" id="r8F-Po-xT6"/>
-                                                        <constraint firstAttribute="height" constant="76" id="wL7-NF-1HB"/>
-                                                    </constraints>
-                                                </imageView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="a3C-9k-y3o" secondAttribute="trailing" constant="12" id="L5B-BA-FjP"/>
-                                                <constraint firstItem="a3C-9k-y3o" firstAttribute="leading" secondItem="Wws-sM-f4h" secondAttribute="trailing" constant="12" id="Xys-59-Yno"/>
-                                                <constraint firstItem="Wws-sM-f4h" firstAttribute="leading" secondItem="lk4-Jq-l3T" secondAttribute="leading" constant="16" id="ZLH-AW-b7b"/>
-                                                <constraint firstItem="a3C-9k-y3o" firstAttribute="top" secondItem="lk4-Jq-l3T" secondAttribute="top" constant="10" id="pSf-rt-26l"/>
-                                                <constraint firstItem="Wws-sM-f4h" firstAttribute="centerY" secondItem="lk4-Jq-l3T" secondAttribute="centerY" id="qFn-zj-bWw"/>
-                                                <constraint firstAttribute="bottom" secondItem="a3C-9k-y3o" secondAttribute="bottom" constant="10" id="rwN-0w-eVb"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="titleLabel" destination="a3C-9k-y3o" id="fVE-E4-fru"/>
-                                            <outlet property="userImageView" destination="Wws-sM-f4h" id="Cbl-TD-Tvb"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="HKH-3N-hix" id="KeO-DX-CQO"/>
                                     <outlet property="delegate" destination="HKH-3N-hix" id="Vyf-jW-lcU"/>
@@ -101,7 +63,4 @@
             <point key="canvasLocation" x="992.79999999999995" y="171.36431784107947"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="dummy" width="75" height="75"/>
-    </resources>
 </document>

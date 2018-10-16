@@ -31,6 +31,7 @@
 		9DE2F1632171F69E00C50703 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE2F1622171F69E00C50703 /* UITextField+Extension.swift */; };
 		9DEA42CB2174EA4800980A18 /* Detail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DEA42CA2174EA4700980A18 /* Detail.storyboard */; };
 		9DEA42CD2174EA8E00980A18 /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA42CC2174EA8E00980A18 /* DetailController.swift */; };
+		9DEA42D02175B54200980A18 /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DEA42CF2175B54200980A18 /* CustomTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +60,7 @@
 		9DE2F1622171F69E00C50703 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		9DEA42CA2174EA4700980A18 /* Detail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Detail.storyboard; sourceTree = "<group>"; };
 		9DEA42CC2174EA8E00980A18 /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
+		9DEA42CF2175B54200980A18 /* CustomTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomTableViewCell.xib; sourceTree = "<group>"; };
 		A8AED9E7D8AD232EC820B082 /* Pods-TestApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TestApp/Pods-TestApp.debug.xcconfig"; sourceTree = "<group>"; };
 		FADDB62757C6825B313204B4 /* Pods_TestApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TestApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEB2D3B057C484B5F73EA646 /* Pods-TestApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-TestApp/Pods-TestApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				9D1036F921747C330029F0C3 /* CustomTableViewCell.swift */,
+				9DEA42CF2175B54200980A18 /* CustomTableViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -254,6 +257,7 @@
 				9DE2F1522170A4E800C50703 /* LaunchScreen.storyboard in Resources */,
 				9DA61D422172340F002C3F54 /* Main.storyboard in Resources */,
 				9DE2F14F2170A4E800C50703 /* Assets.xcassets in Resources */,
+				9DEA42D02175B54200980A18 /* CustomTableViewCell.xib in Resources */,
 				9DEA42CB2174EA4800980A18 /* Detail.storyboard in Resources */,
 				9DE2F14D2170A4E700C50703 /* Login.storyboard in Resources */,
 			);

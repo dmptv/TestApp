@@ -43,8 +43,8 @@ class MainController: UIViewController {
         instance?.uiDelegate = self
 
         requests()
-        
     }
+    
     
     //TODO: - abstarct views
     fileprivate func setupViews() {
@@ -61,9 +61,12 @@ class MainController: UIViewController {
     }
     
     private func setupTableView() {
-        tableView.estimatedRowHeight = 83
+        tableView.estimatedRowHeight = CGFloat(App.Int.heightMainCell)
         tableView.contentInset = UIEdgeInsets(top: 300, left: 0, bottom: 0, right: 0)
         tableView.backgroundColor = UIColor.darkGray
+        
+        let cellNib = UINib(nibName: CustomTableViewCell.defaultReuseIdentifier, bundle: nil)
+        tableView.register(cellNib, forCellReuseIdentifier: CustomTableViewCell.defaultReuseIdentifier)
     }
     
     private func setupHeaderImageView() {
@@ -151,7 +154,7 @@ extension MainController: UITableViewDataSource, UITableViewDelegate {
         return friends.count
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 83.0
+        return CGFloat(App.Int.heightMainCell)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

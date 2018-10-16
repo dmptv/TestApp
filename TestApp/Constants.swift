@@ -38,6 +38,7 @@ struct App {
     struct Int {
         static let userId = 20375184
         static let countPerPage = 50
+        static let heightMainCell = 100
 
     }
     

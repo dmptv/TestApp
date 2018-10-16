@@ -18,8 +18,16 @@ class CustomTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         
-        userImageView.layer.cornerRadius = 38
+        userImageView.layer.cornerRadius = 40
         userImageView.layer.masksToBounds = true
+    }
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
