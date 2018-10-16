@@ -17,7 +17,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="388" height="136.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IiC-ll-Oeq">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dummy" translatesAutoresizingMaskIntoConstraints="NO" id="IiC-ll-Oeq">
                         <rect key="frame" x="16" y="28.5" width="80" height="80"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="80" id="VA7-6E-oWG"/>
@@ -48,4 +48,7 @@
             <point key="canvasLocation" x="211.19999999999999" y="61.619190404797607"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="dummy" width="75" height="75"/>
+    </resources>
 </document>

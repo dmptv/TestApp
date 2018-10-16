@@ -51,7 +51,7 @@ extension Friend {
     }
     
     var photo200Url: URL {
-        return imageURL()
+        return image200URL()
     }
   
     private func imageURL() -> URL {
