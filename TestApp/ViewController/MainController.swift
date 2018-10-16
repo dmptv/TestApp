@@ -9,6 +9,7 @@
 import UIKit
 import VK_ios_sdk
 import SDWebImage
+import Photos
 
 class MainController: UIViewController {
     
@@ -139,7 +140,37 @@ class MainController: UIViewController {
             DispatchQueue.main.async { [weak self] in
                 guard let strongSelf = self else { return }
                 
-                strongSelf.setupImage(user: user, imageView: strongSelf.imageView)
+                if let identifier = GlobalData.sharedInstance.dataRefenciesDict[user.id] {
+                    let allPhotos = PHAsset.fetchAssets(withLocalIdentifiers: [identifier], options: PHFetchOptions.init())
+                    
+                    DispatchQueue.global(qos: .background).async {
+                        allPhotos.enumerateObjects({ (asset, count, stop) in
+                            let imageManager = PHImageManager.default()
+                            let targetSize = CGSize(width: 200, height: 200)
+                            let options = PHImageRequestOptions()
+                            options.isSynchronous = true
+                            imageManager.requestImage(for: asset,
+                                                      targetSize: targetSize,
+                                                      contentMode: .aspectFit,
+                                                      options: options,
+                                                      resultHandler:
+                                { (image, info) in
+                                    
+                                    if let image = image {
+                                        DispatchQueue.main.async {
+                                            strongSelf.imageView.image = image
+                                        }
+                                    }
+                            })
+                            
+                        })
+                    }
+                    
+                    
+                } else {
+                    strongSelf.setupImage(user: user, imageView: strongSelf.imageView)
+                }
+                
                 strongSelf.userLabel.text = user.firstName + " " + user.lastName
             }
         }
@@ -172,7 +203,12 @@ extension MainController: UITableViewDataSource, UITableViewDelegate {
         cell.contentView.backgroundColor = UIColor.black
         cell.titleLabel.text = friend.firstName + " " + friend.lastName
         cell.titleLabel.textColor = .white
-        setupImage(user: friend, imageView: cell.userImageView)
+        
+        if let identifier = GlobalData.sharedInstance.dataRefenciesDict[friend.id] {
+            print(" local identifier", identifier)
+        } else {
+           setupImage(user: friend, imageView: cell.userImageView)
+        }
         
         return cell
     }

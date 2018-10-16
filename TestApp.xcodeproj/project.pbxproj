@@ -19,6 +19,7 @@
 		9D64067921761C9800118AEE /* PhotoSelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D64067821761C9800118AEE /* PhotoSelectorCell.swift */; };
 		9D64067B21761CD200118AEE /* UIView+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D64067A21761CD200118AEE /* UIView+Extentions.swift */; };
 		9D64067D21761D0100118AEE /* PhotoSelectorHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D64067C21761D0100118AEE /* PhotoSelectorHeader.swift */; };
+		9D64067F2176223900118AEE /* GlobalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D64067E2176223900118AEE /* GlobalData.swift */; };
 		9DA61D3A21723031002C3F54 /* UIStoryboard+Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA61D3921723031002C3F54 /* UIStoryboard+Storyboards.swift */; };
 		9DA61D3C2172304C002C3F54 /* UIViewController+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA61D3B2172304C002C3F54 /* UIViewController+Extentions.swift */; };
 		9DA61D3E21723069002C3F54 /* StoryboardIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA61D3D21723069002C3F54 /* StoryboardIdentifiable.swift */; };
@@ -50,6 +51,7 @@
 		9D64067821761C9800118AEE /* PhotoSelectorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorCell.swift; sourceTree = "<group>"; };
 		9D64067A21761CD200118AEE /* UIView+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extentions.swift"; sourceTree = "<group>"; };
 		9D64067C21761D0100118AEE /* PhotoSelectorHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorHeader.swift; sourceTree = "<group>"; };
+		9D64067E2176223900118AEE /* GlobalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalData.swift; sourceTree = "<group>"; };
 		9DA61D3921723031002C3F54 /* UIStoryboard+Storyboards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Storyboards.swift"; sourceTree = "<group>"; };
 		9DA61D3B2172304C002C3F54 /* UIViewController+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extentions.swift"; sourceTree = "<group>"; };
 		9DA61D3D21723069002C3F54 /* StoryboardIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardIdentifiable.swift; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 				9D1036F2217362850029F0C3 /* Service.swift */,
 				9D10370021749CF20029F0C3 /* Model */,
 				9D1036F62173652E0029F0C3 /* Constants.swift */,
+				9D64067E2176223900118AEE /* GlobalData.swift */,
 				9DA61D4021723128002C3F54 /* ViewController */,
 				9D1036FD21748DB70029F0C3 /* Views */,
 				9DA61D3821722ECF002C3F54 /* Storyboards */,
@@ -341,6 +344,7 @@
 			files = (
 				9D10370221749D0A0029F0C3 /* ResponseMessages.swift in Sources */,
 				9DE2F14A2170A4E700C50703 /* LoginController.swift in Sources */,
+				9D64067F2176223900118AEE /* GlobalData.swift in Sources */,
 				9DE2F15A2170E22E00C50703 /* MainController.swift in Sources */,
 				9D64067B21761CD200118AEE /* UIView+Extentions.swift in Sources */,
 				9DE2F1632171F69E00C50703 /* UITextField+Extension.swift in Sources */,

@@ -18,6 +18,7 @@ extension DataManagerProtocol {
     var defaults: UserDefaults! {
         return (UIApplication.shared.delegate as? AppDelegate)?.defaults
     }
+
 }
 
 @UIApplicationMain

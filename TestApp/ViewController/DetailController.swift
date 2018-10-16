@@ -39,7 +39,7 @@ class DetailController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         let photoSelectorController = PhotoSelectorController(collectionViewLayout: layout)
         let navController = UINavigationController(rootViewController: photoSelectorController)
-        
+        photoSelectorController.idKey = user.id
         photoSelectorController.didTapNext = { [weak self] image in
             DispatchQueue.main.async {
                self?.profilImageview.image = image

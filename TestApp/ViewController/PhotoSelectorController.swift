@@ -15,6 +15,7 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
     let headerId = "headerId"
     
     var didTapNext: ((UIImage?) -> Void)?
+    var idKey: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -124,9 +125,12 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
                                           targetSize: targetSize,
                                           contentMode: .default,
                                           options: nil,
-                                          resultHandler: { (image, info) in
-                                            
-                                            header.photoImageView.image = image
+                                          resultHandler:
+                    { [weak self] (image, info) in
+                        guard let strSelf = self else { return }
+                        GlobalData.sharedInstance.dataRefenciesDict[strSelf.idKey] = selectedAsset.localIdentifier
+                        
+                        header.photoImageView.image = image
                 })
                 
             }
@@ -181,9 +185,8 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
     }
     
     @objc func handleNext() {
-        // header?.photoImageView.image
         if let didTapNext = didTapNext {
-            didTapNext(header?.photoImageView.image)
+             didTapNext(header?.photoImageView.image)
         }
         self.dismiss(animated: true, completion: nil)
     }
