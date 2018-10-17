@@ -29,7 +29,6 @@ class MainController: UIViewController {
     var friends: [Friend] = []
     
     var indexPathToReload: IndexPath?
-   
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,8 +72,12 @@ class MainController: UIViewController {
         imageView.clipsToBounds = true
         view.addSubview(imageView)
         
-        userLabel = UILabel(frame: CGRect(x: imageView.frame.minX + 20, y: imageView.frame.maxY - 12, width: imageView.bounds.size.width, height: 30))
+        userLabel = UILabel(frame: CGRect(x: imageView.frame.minX + 20,
+                                          y: imageView.frame.maxY - 12,
+                                          width: imageView.bounds.size.width,
+                                          height: 30))
         userLabel.textColor = UIColor.white
+        userLabel.font = UIFont(name: "Marker Felt", size: 24)
         imageView.addSubview(userLabel)
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
