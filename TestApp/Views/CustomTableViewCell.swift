@@ -21,7 +21,7 @@ class CustomTableViewCell: UITableViewCell {
         userImageView.layer.cornerRadius = 40
         userImageView.layer.masksToBounds = true
         
-        /////
+
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
